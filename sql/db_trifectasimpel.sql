@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2024 at 02:56 PM
+-- Generation Time: Jan 10, 2024 at 02:56 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -49,6 +49,50 @@ INSERT INTO `identitas` (`id`, `jenisidentitas`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `jenisproduk`
+--
+
+CREATE TABLE `jenisproduk` (
+  `id` int(11) NOT NULL,
+  `jenis` varchar(55) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `jenisproduk`
+--
+
+INSERT INTO `jenisproduk` (`id`, `jenis`, `status`) VALUES
+(1, 'CINCIN', 1),
+(2, 'KALUNG', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `karyawan`
+--
+
+CREATE TABLE `karyawan` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(55) NOT NULL,
+  `alamat` text NOT NULL,
+  `kontak` varchar(55) NOT NULL,
+  `profesi` int(11) NOT NULL,
+  `ttd` varchar(55) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `karyawan`
+--
+
+INSERT INTO `karyawan` (`id`, `nama`, `alamat`, `kontak`, `profesi`, `ttd`, `status`) VALUES
+(1, 'Indra Kusuma', 'Purwokerto', '0822-1133-1113', 1, '2024-1704883590.png', 1),
+(2, 'Dimas Anugerah', 'Purbalingga', '0822-1133-1113', 1, '2024-1704892024.png', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `kontak`
 --
 
@@ -67,7 +111,8 @@ INSERT INTO `kontak` (`id`, `jeniskontak`, `status`) VALUES
 (2, 'TELEPON RUMAH', 1),
 (3, 'TELEPON KANTOR', 1),
 (4, 'EMAIL', 1),
-(6, 'ALAT MEDIA SOSIAL', 1);
+(6, 'ALAT MEDIA SOSIAL', 1),
+(7, 'FAX', 1);
 
 -- --------------------------------------------------------
 
@@ -87,6 +132,15 @@ CREATE TABLE `produk` (
   `fotoproduk` varchar(255) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `produk`
+--
+
+INSERT INTO `produk` (`id`, `kodeproduk`, `namaproduk`, `hargaproduk`, `keteranganproduk`, `jenisproduk`, `beratproduk`, `karatproduk`, `fotoproduk`, `status`) VALUES
+(1, '96296521983160488', 'Cincin 1', 2500000, 'Cincin 1', 1, 3.5, 24, '2024-1704872263.png', 1),
+(2, '68585906421395912', 'Cincin 2', 2500000, 'Cincin 2', 1, 3.5, 24, '2024-1704872713.png', 1),
+(3, '4695133476796014', 'Cincin 3', 2500000, 'Cincin 3', 1, 3.5, 24, '2024-1704894103.png', 1);
 
 -- --------------------------------------------------------
 
@@ -132,6 +186,28 @@ INSERT INTO `status` (`id`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `suplier`
+--
+
+CREATE TABLE `suplier` (
+  `id` int(11) NOT NULL,
+  `namasuplier` varchar(55) NOT NULL,
+  `alamatsuplier` text NOT NULL,
+  `kontaksuplier` varchar(55) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `suplier`
+--
+
+INSERT INTO `suplier` (`id`, `namasuplier`, `alamatsuplier`, `kontaksuplier`, `status`) VALUES
+(1, 'Central Musik Purwokerto', 'Roxy Square Building\r\nLt LG blok C6 no3 Grogol – Jakarta', '0857-1692-8887', 1),
+(3, 'Triple 3 Music', 'Purwokerto', '0857-1692-8887', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -162,6 +238,18 @@ ALTER TABLE `identitas`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `jenisproduk`
+--
+ALTER TABLE `jenisproduk`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `karyawan`
+--
+ALTER TABLE `karyawan`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `kontak`
 --
 ALTER TABLE `kontak`
@@ -186,6 +274,12 @@ ALTER TABLE `status`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `suplier`
+--
+ALTER TABLE `suplier`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -199,19 +293,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `identitas`
 --
 ALTER TABLE `identitas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `jenisproduk`
+--
+ALTER TABLE `jenisproduk`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `karyawan`
+--
+ALTER TABLE `karyawan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `kontak`
 --
 ALTER TABLE `kontak`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `profesi`
@@ -224,6 +330,12 @@ ALTER TABLE `profesi`
 --
 ALTER TABLE `status`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `suplier`
+--
+ALTER TABLE `suplier`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
