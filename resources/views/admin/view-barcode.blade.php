@@ -49,15 +49,28 @@
 		<!-- Main Wrapper -->
 		<div class="main-wrapper">
 
-			<!-- Header -->
-			@include('admin.components.header')
-			<!-- Header -->
-			
-			<!-- Sidebar -->
-			@include('admin.components.sidebar')
-			<!-- /Sidebar -->
-
-			@yield('content')
+			<div class="page-wrapper">
+                <div class="content">
+                    <!-- /product list -->
+                    <section class="comp-section">
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-4 d-flex">
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4 d-flex">
+                                <div class="flex-fill">
+                                    @foreach ($produk as $item)
+                                    {!! DNS2D::getBarcodeSVG($item->kodeproduk, 'QRCODE',10,10)!!}
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4 d-flex">
+                            </div>
+                        </div>
+                    </section>
+                    <!-- /product list -->
+                </div>
+            </div>
+            
 
 		</div>
 		<!-- /Main Wrapper -->

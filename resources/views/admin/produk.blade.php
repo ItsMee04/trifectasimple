@@ -19,126 +19,99 @@
             </div>
         </div>
         <!-- /Page Header -->
-        
+        @if ($errors->any())
+        <div class="col-md-3">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @foreach ($errors->all() as $error)
+                <strong>Peringatan !</strong> 
+                <li>{{$error}}</li>
+                @endforeach
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+        @endif
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">FORM INPUT KONTAK</h5>
+                        <h5 class="card-title">FORM INPUT PRODUK</h5>
                     </div>
                     <div class="card-body">
-                        <form action="kontak" method="POST">
+                        <form action="produk" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Product Name</label>
-                                    <input type="text" >
+                                    <label>Kode Produk</label>
+                                    <input type="text" class="form-control is-valid" name="kodeproduk" value="{{$produkbarang}}" readonly>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Category</label>
-                                    <select class="select">
-                                        <option>Choose Category</option>
-                                        <option>Computers</option>
-                                    </select>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Nama Produk</label>
+                                        <input type="text" name="namaproduk" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Harga Produk</label>
+                                        <input type="text" class="form-control" name="hargaproduk" required>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Sub Category</label>
-                                    <select class="select">
-                                        <option>Choose Sub Category</option>
-                                        <option>Fruits</option>
-                                    </select>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Jenis Produk</label>
+                                        <select class="select" name="jenisproduk" required>
+                                            @foreach ($jenisproduk as $itemjenisproduk)
+                                            <option value="{{$itemjenisproduk->id}}">{{$itemjenisproduk->jenis}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Berat Produk</label>
+                                        <input type="text" name="beratproduk" required>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Brand</label>
-                                    <select class="select">
-                                        <option>Choose Brand</option>
-                                        <option>Brand</option>
-                                    </select>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Karat Produk</label>
+                                        <input type="text" name="karatproduk" required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Unit</label>
-                                    <select class="select">
-                                        <option>Choose Unit</option>
-                                        <option>Unit</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>SKU</label>
-                                    <input type="text" >
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Minimum Qty</label>
-                                    <input type="text" >
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Quantity</label>
-                                    <input type="text" >
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select class="select" name="status" required>
+                                            <option value="1"> AKTIF</option>
+                                            <option value="2"> TIDAK AKTIF</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Description</label>
-                                    <textarea class="form-control"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Tax</label>
-                                    <select class="select">
-                                        <option>Choose Tax</option>
-                                        <option>2%</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Discount Type</label>
-                                    <select class="select">
-                                        <option>Percentage</option>
-                                        <option>10%</option>
-                                        <option>20%</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Price</label>
-                                    <input type="text" >
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>	Status</label>
-                                    <select class="select">
-                                        <option>Closed</option>
-                                        <option>Open</option>
-                                    </select>
+                                    <label>Keterangan</label>
+                                    <textarea class="form-control" name="keteranganproduk" required></textarea>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>	Product Image</label>
-                                    <div class="image-upload">
-                                        <input type="file">
-                                        <div class="image-uploads">
-                                            <img src="assets/img/icons/upload.svg" alt="img">
-                                            <h4>Drag and drop a file to upload</h4>
-                                        </div>
-                                    </div>
+                                    <div class="custom-file-container" data-upload-id="myFirstImage">
+										<label>Foto Produk(PNG/JPG) <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
+										<label class="custom-file-container__custom-file" >
+											<input type="file" class="custom-file-container__custom-file__custom-file-input" name="fotoproduk" accept="image/*">
+											<input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+											<span class="custom-file-container__custom-file__custom-file-control"></span>
+										</label>
+										<div class="custom-file-container__image-preview"></div>
+									</div>
                                 </div>
                             </div>
                             <div class="text-end">
@@ -178,44 +151,52 @@
                     <table class="table  datanew">
                         <thead>
                             <tr>
-                                <th>Product Name</th>
-                                <th>SKU</th>
-                                <th>Category </th>
-                                <th>Brand</th>
-                                <th>price</th>
-                                <th>Unit</th>
-                                <th>Qty</th>
-                                <th>Created By</th>
+                                <th>No.</th>
+                                <th>Kode Barang</th>
+                                <th>Nama Produk</th>
+                                <th>Harga </th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($listproduk as $item)
                             <tr>
-                                <td class="productimgname">
-                                    <a href="javascript:void(0);" class="product-img">
-                                        <img src="{{asset('assets')}}/img/product/product1.jpg" alt="product">
-                                    </a>
-                                    <a href="javascript:void(0);">Macbook pro</a>
-                                </td>
-                                <td>PT001</td>
-                                <td>Computers</td>
-                                <td>N/D</td>
-                                <td>1500.00</td>
-                                <td>pc</td>
-                                <td>100.00</td>
-                                <td>Admin</td>
                                 <td>
-                                    <a class="me-3" href="product-details.html">
-                                        <img src="{{asset('assets')}}/img/icons/eye.svg" alt="img">
+                                    {{$loop->iteration}}.
+                                </td>
+                                <td>
+                                    {!! 
+                                        DNS2D::getBarcodeSVG($item->kodeproduk, 'QRCODE')
+                                    !!}
+                                </td>
+                                <td class="productimgname">
+                                    <a href="produk-detail/{{$item->kodeproduk}}" class="product-img">
+                                        <img src="{{asset('storage/fotoproduk/'.$item->fotoproduk)}}" alt="product">
                                     </a>
-                                    <a class="me-3" href="editproduct.html">
-                                        <img src="{{asset('assets')}}/img/icons/edit.svg" alt="img">
+                                    <a href="produk-detail/{{$item->kodeproduk}}">{{$item->namaproduk}}</a>
+                                </td>
+                                <td>{{"Rp."." ". number_format($item->hargaproduk,2)}}</td>
+                                <td>
+                                    @if ($item->status == 1)
+                                        <span class="badges bg-lightgreen">AKTIF</span>
+                                    @else
+                                        <span class="badges bg-lightred">TIDAK AKTIF</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a class="me-3" href="produk-detail/{{$item->kodeproduk}}">
+                                        <img src="{{asset('assets')}}/img/icons/eye.svg" alt="img" data-bs-toggle="tooltip" data-bs-placement="top" title="DETAIL DATA">
                                     </a>
-                                    <a class="confirm-text" href="javascript:void(0);">
-                                        <img src="{{asset('assets')}}/img/icons/delete.svg" alt="img">
+                                    <a class="me-3" href="edit-produk/{{$item->id}}">
+                                        <img src="{{asset('assets')}}/img/icons/edit.svg" alt="img" data-bs-toggle="tooltip" data-bs-placement="top" title="EDIT DATA">
+                                    </a>
+                                    <a class="confirm-text" href="javascript:void(0);" onclick="confirm_modal('delete-produk/{{$item->id}}');">
+                                        <img src="{{asset('assets')}}/img/icons/delete.svg" alt="img" data-bs-toggle="tooltip" data-bs-placement="top" title="DELETE DATA">
                                     </a>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

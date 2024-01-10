@@ -19,7 +19,17 @@
             </div>
         </div>
         <!-- /Page Header -->
-
+        @if ($errors->any())
+        <div class="col-md-3">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @foreach ($errors->all() as $error)
+                <strong>Peringatan !</strong> 
+                <li>{{$error}}</li>
+                @endforeach
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+        @endif
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
