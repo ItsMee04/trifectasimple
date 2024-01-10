@@ -1,6 +1,6 @@
 @extends('admin.components.index')
 
-@section('title','Produk')
+@section('title','Karyawan')
 
 @section('content')
 <div class="page-wrapper cardhead">
@@ -10,15 +10,15 @@
 		<div class="page-header">
             <div class="row">
                 <div class="col">
-                    <h3 class="page-title">PRODUK BARANG</h3>
+                    <h3 class="page-title">Karyawan</h3>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Produk Barang</a></li>
-                        <li class="breadcrumb-item active">Produk Barang</li>
+                        <li class="breadcrumb-item"><a href="#">User Management</a></li>
+                        <li class="breadcrumb-item active">Karyawan</li>
                     </ul>
                 </div>
             </div>
             <div class="page-btn">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#addProduk" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img" class="me-1">Tambah Produk</a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#addKaryawan" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img" class="me-1">Tambah Karyawan</a>
             </div>
         </div>
         <!-- /Page Header -->
@@ -62,28 +62,22 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Kode Barang</th>
-                                <th>Nama Produk</th>
-                                <th>Harga </th>
+                                <th>Nama</th>
+                                <th>Alamat</th>
+                                <th>Kontak </th>
+                                <th>Profesi </th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($listproduk as $item)
+                            @foreach ($listkaryawan as $item)
                             <tr>
-                                <td>
-                                    {{$loop->iteration}}.
-                                </td>
-                                <td>
-                                    {!! 
-                                        DNS2D::getBarcodeSVG($item->kodeproduk, 'QRCODE')
-                                    !!}
-                                </td>
-                                <td>
-                                    <a href="produk-detail/{{$item->kodeproduk}}">{{$item->namaproduk}}</a>
-                                </td>
-                                <td>{{"Rp."." ". number_format($item->hargaproduk,2)}}</td>
+                                <td>{{$loop->iteration}}.</td>
+                                <td>{{$item->nama}}</td>
+                                <td>{{$item->alamat}}</td>
+                                <td>{{$item->kontak}}</td>
+                                <td>{{$item->jenisprofesi}}</td>
                                 <td>
                                     @if ($item->status == 1)
                                         <span class="badges bg-lightgreen">AKTIF</span>
@@ -92,13 +86,13 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a class="me-3" href="produk-detail/{{$item->kodeproduk}}">
-                                        <img src="{{asset('assets')}}/img/icons/eye.svg" alt="img" data-toggle="tooltip" data-placement="top" title="DETAIL DATA">
-                                    </a>
-                                    <a class="me-3" href="edit-produk/{{$item->id}}">
+                                    <a class="me-3" href="edit-karyawan/{{$item->id}}">
                                         <img src="{{asset('assets')}}/img/icons/edit.svg" alt="img" data-toggle="tooltip" data-placement="top" title="EDIT DATA">
                                     </a>
-                                    <a class="confirm-text" href="javascript:void(0);" onclick="confirm_modal('delete-produk/{{$item->id}}');">
+                                    <a class="me-3" href="users-karyawan/{{$item->id}}">
+                                        <img src="{{asset('assets')}}/img/icons/lock.svg" alt="img" data-toggle="tooltip" data-placement="top" title="USERS DATA">
+                                    </a>
+                                    <a class="confirm-text" href="javascript:void(0);" onclick="confirm_modal('delete-karyawan/{{$item->id}}');">
                                         <img src="{{asset('assets')}}/img/icons/delete.svg" alt="img" data-toggle="tooltip" data-placement="top" title="DELETE DATA">
                                     </a>
                                 </td>
@@ -114,57 +108,39 @@
 </div>
 
 <!-- MODAL -->
-<div class="modal custom-modal fade" id="addProduk">
+<div class="modal custom-modal fade" id="addKaryawan">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">FORM INPUT PRODUK</h4>
+                <h4 class="modal-title">FORM INPUT KARYAWAN</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body">
-                <form action="produk" method="POST" enctype="multipart/form-data">
+                <form action="karyawan" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group">
-                        <label>Kode Produk</label>
-                        <input type="text" class="form-control is-valid" name="kodeproduk" value="{{$produkbarang}}" readonly>
-                    </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label>Nama Produk</label>
-                                <input type="text" class="form-control form-white" name="namaproduk" required>
+                                <label>Nama Karyawan</label>
+                                <input type="text" class="form-control form-white" placeholder="Masukan Nama Karyawan" type="text" name="namakaryawan" required>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label>Harga Produk</label>
-                                <input type="text" class="form-control form-white" name="hargaproduk" required>
+                                <label>Kontak Karyawan</label>
+                                <input type="text" class="form-control form-white" placeholder="Masukan Kontak Karyawan" name="kontakkaryawan" required>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label>Jenis Produk</label>
-                                <select class="select form-control form-white" data-placeholder="Choose a color..." name="jenisproduk" required>
-                                    @foreach ($jenisproduk as $itemjenisproduk)
-                                        <option value="{{$itemjenisproduk->id}}">{{$itemjenisproduk->jenis}}</option>
+                                <label>Profesi Karyawan</label>
+                                <select class="select form-control form-white" data-placeholder="Choose a color..." name="profesi" required>
+                                    @foreach ($profesi as $itemprofesi)
+                                    <option value="{{$itemprofesi->id}}"> {{$itemprofesi->jenisprofesi}}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Berat Produk</label>
-                                <input type="text" class="form-control form-white" name="beratproduk" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Karat Produk</label>
-                                <input type="text" class="form-control form-white" name="karatproduk" required>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -178,16 +154,16 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Keterangan</label>
-                        <textarea class="form-control form-white" name="keteranganproduk" required></textarea>
+                        <label>Alamat Karyawan</label>
+                        <textarea class="form-control form-white" name="alamatkaryawan" required></textarea>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label>	Product Image</label>
+                            <label>	TTD Karyawan</label>
                             <div class="custom-file-container" data-upload-id="myFirstImage">
-                                <label>Foto Produk(PNG/JPG) <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
+                                <label>Foto TTD(PNG/JPG) <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
                                 <label class="custom-file-container__custom-file" >
-                                    <input type="file" class="custom-file-container__custom-file__custom-file-input" name="fotoproduk" accept="image/*">
+                                    <input type="file" class="custom-file-container__custom-file__custom-file-input" name="ttdkaryawan" accept="image/*">
                                     <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
                                     <span class="custom-file-container__custom-file__custom-file-control"></span>
                                 </label>

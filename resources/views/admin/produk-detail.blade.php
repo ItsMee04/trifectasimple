@@ -25,7 +25,7 @@
                     <div class="card-body">
                         <div class="bar-code-view">
                             {!! DNS2D::getBarcodeSVG($listproduk->kodeproduk, 'QRCODE')!!}
-                            <a class="printimg" href="/printbarcode">
+                            <a class="printimg" href="/printbarcode/{{$listproduk->kodeproduk}}" target="_blank">
                                 <button type="button" class="btn btn-rounded btn-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Print Barcode"><i class="fas fa-print"></i></button>
                             </a>
                         </div>

@@ -17,6 +17,9 @@
                     </ul>
                 </div>
             </div>
+            <div class="page-btn">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#addIdentitas" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img" class="me-1">Tambah Identitas</a>
+            </div>
         </div>
         <!-- /Page Header -->
         @if ($errors->any())
@@ -30,34 +33,6 @@
             </div>
         </div>
         @endif
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">FORM INPUT IDENTITAS</h5>
-                    </div>
-                    <div class="card-body">
-                        <form action="identitas" method="POST">
-                            @csrf
-                            <div class="form-group">
-                                <label>Jenis Identitas</label>
-                                <input type="text" class="form-control" name="jenisidentitas" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Status</label>
-                                <select class="select" name="status" required>
-                                    <option value="1">AKTIF</option>
-                                    <option value="2">TIDAK AKTIF</option>
-                                </select>
-                            </div>
-                            <div class="text-end">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
         
         <!-- /product list -->
         <div class="card">
@@ -120,6 +95,37 @@
             </div>
         </div>
         <!-- /product list -->
+    </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal custom-modal fade" id="addIdentitas">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">FORM INPUT IDENTITAS</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <form action="identitas" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label>Jenis Identitas</label>
+                        <input type="text" class="form-control form-white" placeholder="Masukan Jenis Identitas" type="text" name="jenisidentitas" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select class="select form-control form-white" name="status" required>
+                            <option value="1"> AKTIF</option>
+                            <option value="2"> TIDAK AKTIF</option>
+                        </select>
+                    </div>
+                    <div class="submit-section">
+                        <button type="submit" class="btn btn-primary save-category submit-btn" data-dismiss="modal">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 

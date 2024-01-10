@@ -7,7 +7,10 @@ use App\Http\Controllers\KontakController;
 use App\Http\Controllers\ProfesiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IdentitasController;
+use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\SuplierController;
+use App\Models\KaryawanModel;
 use Faker\Core\Barcode;
 
 /*
@@ -63,10 +66,21 @@ Route::middleware('auth')->group(function () {
         Route::post('edit-produk/{id}', [ProdukController::class, 'update']);
         Route::get('delete-produk/{id}', [ProdukController::class, 'delete']);
 
-        //<!-- MASTER PRODUK BARANG -->
+        //<!-- MASTER BARCODE BARANG -->
         Route::get('scanbarcode', [BarcodeController::class, 'index']);
         Route::post('scanbarcodevalidasi', [BarcodeController::class, 'scanbarcodevalidasi']);
         Route::get('viewbarcode/{id}', [BarcodeController::class, "viewBarcode"]);
-        Route::get('printbarcode', [BarcodeController::class, "printBarcode"]);
+        Route::get('printbarcode/{id}', [BarcodeController::class, "printBarcode"]);
+
+        //<!-- MASTER SUPPLIER -->
+        Route::get('suplier', [SuplierController::class, 'index']);
+        Route::post('suplier', [SuplierController::class, 'store']);
+        Route::get('edit-suplier/{id}', [SuplierController::class, 'show']);
+        Route::post('edit-suplier/{id}', [SuplierController::class, 'update']);
+        Route::get('delete-suplier/{id}', [SuplierController::class, 'delete']);
+
+        //<!-- MASTER KARYAWAN -->
+        Route::get('karyawan',[KaryawanController::class,'index']);
+        Route::post('karyawan',[KaryawanController::class,'store']);
     });
 });

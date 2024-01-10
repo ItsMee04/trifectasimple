@@ -37,13 +37,9 @@ class BarcodeController extends Controller
         return view('admin.view-barcode', ['qrcodeid' => $qrcodeid]);
     }
 
-    public function printBarcode()
+    public function printBarcode($id)
     {
-        $qrcodeid = [
-            'produk' => ProdukModel::all()
-        ];
-
-        $pdf = Pdf::loadView('admin.view-barcode', $qrcodeid);
-        return $pdf->download('qrbarcode.pdf');
+        $qrcodeid = ProdukModel::where('kodeproduk', $id)->first()->kodeproduk;
+        return view('admin.view-barcode', ['qrcodeid' => $qrcodeid]);
     }
 }

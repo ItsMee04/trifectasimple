@@ -28,7 +28,20 @@
                                 <li><a href="/scanbarcode">Scan Barcode</a></li>
                             </ul>
                         </li>
+                        <li><a href="/suplier"><i data-feather="codepen"></i><span>Suplier</span></a></li>
                     </ul>								
+                </li>
+                <li class="submenu-open">
+                    <h6 class="submenu-hdr">User Management</h6>		
+                    <ul>
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><i data-feather="users"></i><span>Manage Users</span><span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="/karyawan">Karyawan </a></li>
+                                <li><a href="/users">Users Karyawan</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </li>
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">Products</h6>
