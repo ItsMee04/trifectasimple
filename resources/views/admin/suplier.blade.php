@@ -17,6 +17,9 @@
                     </ul>
                 </div>
             </div>
+            <div class="page-btn">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#addSuplier" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img" class="me-1">Tambah Suplier</a>
+            </div>
         </div>
         <!-- /Page Header -->
         @if ($errors->any())
@@ -30,52 +33,6 @@
             </div>
         </div>
         @endif
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">FORM INPUT SUPLIER</h5>
-                    </div>
-                    <div class="card-body">
-                        <form action="karyawan" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Nama Suplier</label>
-                                        <input type="text" name="namasuplier" required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Kontak Suplier</label>
-                                        <input type="text" class="form-control" name="kontaksuplier" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Alamat Suplier</label>
-                                    <textarea class="form-control" name="alamatsuplier" required></textarea>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Status</label>
-                                    <select class="select" name="status" required>
-                                        <option value="1"> AKTIF</option>
-                                        <option value="2"> TIDAK AKTIF</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="text-end">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- /product list -->
         <div class="card">
@@ -143,6 +100,51 @@
             </div>
         </div>
         <!-- /product list -->
+    </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal custom-modal fade" id="addSuplier">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">FORM INPUT SUPLIER</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <form action="suplier" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Nama Suplier</label>
+                                <input type="text" class="form-control form-white" placeholder="Masukan Nama Suplier" type="text" name="namasuplier" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Kontak Suplier</label>
+                                <input type="text" class="form-control form-white" name="kontaksuplier" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Alamat Suplier</label>
+                        <textarea class="form-control form-white" name="alamatsuplier" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select class="select form-control form-white" name="status" required>
+                            <option value="1"> AKTIF</option>
+                            <option value="2"> TIDAK AKTIF</option>
+                        </select>
+                    </div>
+                    <div class="submit-section">
+                        <button type="submit" class="btn btn-primary save-category submit-btn" data-dismiss="modal">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
