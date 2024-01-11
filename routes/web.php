@@ -10,6 +10,7 @@ use App\Http\Controllers\IdentitasController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SuplierController;
+use App\Http\Controllers\UsersController;
 use App\Models\KaryawanModel;
 use Faker\Core\Barcode;
 
@@ -80,7 +81,16 @@ Route::middleware('auth')->group(function () {
         Route::get('delete-suplier/{id}', [SuplierController::class, 'delete']);
 
         //<!-- MASTER KARYAWAN -->
-        Route::get('karyawan',[KaryawanController::class,'index']);
-        Route::post('karyawan',[KaryawanController::class,'store']);
+        Route::get('karyawan', [KaryawanController::class, 'index']);
+        Route::post('karyawan', [KaryawanController::class, 'store']);
+        Route::get('edit-karyawan/{id}', [KaryawanController::class, 'show']);
+        Route::post('edit-karyawan/{id}', [KaryawanController::class, 'update']);
+        Route::post('users-karyawan/{id}', [KaryawanController::class, 'usersKaryawan']);
+        Route::get('delete-karyawan/{id}', [KaryawanController::class, 'delete']);
+
+        //<!-- MASTER KARYAWAN -->
+        Route::get('users', [UsersController::class, 'index']);
+        Route::post('edit-users/{id}', [UsersController::class, 'update']);
+        Route::get('delete-users/{id}', [UsersController::class, 'delete']);
     });
 });

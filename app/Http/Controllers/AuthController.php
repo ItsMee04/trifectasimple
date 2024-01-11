@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\KaryawanModel;
+use App\Models\ProfesiModel;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -25,7 +29,14 @@ class AuthController extends Controller
             }
 
             if (Auth::user()->status == 1) {
-                if(Auth::user()->role == 1){
+                if (Auth::user()->role == 1) {
+                    $nama           = KaryawanModel::where('id', Auth::user()->iduser)->first()->nama;
+
+                    $profesi        = KaryawanModel::where('id', Auth::user()->iduser)->first()->profesi;
+                    $dataprofesi    = ProfesiModel::where('id', $profesi)->first()->jenisprofesi;
+
+                    Session::put('nama', $nama);
+                    Session::put('profesi', $dataprofesi);
                     return redirect('dashboard');
                 }
             }
@@ -39,5 +50,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('login');
+        session()->forget('nama');
+        session()->forget('profesi');
     }
 }

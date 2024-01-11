@@ -1,6 +1,6 @@
 @extends('admin.components.index')
 
-@section('title', 'Suplier')
+@section('title', 'Users')
 
 @section('content')
     <div class="page-wrapper cardhead">
@@ -10,16 +10,12 @@
             <div class="page-header">
                 <div class="row">
                     <div class="col">
-                        <h3 class="page-title">Suplier</h3>
+                        <h3 class="page-title">Users</h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Master Data</a></li>
-                            <li class="breadcrumb-item active">Suplier</li>
+                            <li class="breadcrumb-item"><a href="#">User Management</a></li>
+                            <li class="breadcrumb-item active">Users</li>
                         </ul>
                     </div>
-                </div>
-                <div class="page-btn">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#addSuplier" class="btn btn-added"><img
-                            src="assets/img/icons/plus.svg" alt="img" class="me-1">Tambah Suplier</a>
                 </div>
             </div>
             <!-- /Page Header -->
@@ -34,7 +30,6 @@
                     </div>
                 </div>
             @endif
-
             <!-- /product list -->
             <div class="card">
                 <div class="card-body">
@@ -68,20 +63,18 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Suplier</th>
-                                    <th>Alamat</th>
-                                    <th>Kontak </th>
+                                    <th>Nama</th>
+                                    <th>Username</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($listsuplier as $item)
+                                @foreach ($listkaryawan as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}.</td>
-                                        <td>{{ $item->namasuplier }}</td>
-                                        <td>{{ $item->alamatsuplier }}</td>
-                                        <td>{{ $item->kontaksuplier }}</td>
+                                        <td>{{ $item->nama }}</td>
+                                        <td>{{ $item->username }}</td>
                                         <td>
                                             @if ($item->status == 1)
                                                 <span class="badges bg-lightgreen">AKTIF</span>
@@ -90,17 +83,20 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a class="me-3" href="edit-suplier/{{ $item->id }}">
+                                            <a class="me-3" href="#">
                                                 <img src="{{ asset('assets') }}/img/icons/edit.svg" alt="img"
+                                                    data-bs-toggle="modal" data-bs-target="#addUsers{{ $item->id }}"
                                                     data-toggle="tooltip" data-placement="top" title="EDIT DATA">
                                             </a>
                                             <a class="confirm-text" href="javascript:void(0);"
-                                                onclick="confirm_modal('delete-suplier/{{ $item->id }}');">
+                                                onclick="confirm_modal('delete-users/{{ $item->id }}');">
                                                 <img src="{{ asset('assets') }}/img/icons/delete.svg" alt="img"
                                                     data-toggle="tooltip" data-placement="top" title="DELETE DATA">
                                             </a>
                                         </td>
                                     </tr>
+                                    <!-- MODAL EDIT USERS -->
+                                    @include('admin.edit-users')
                                 @endforeach
                             </tbody>
                         </table>
@@ -111,71 +107,20 @@
         </div>
     </div>
 
-    <!-- MODAL -->
-    <div class="modal custom-modal fade" id="addSuplier">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">FORM INPUT SUPLIER</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"><span
-                            aria-hidden="true">×</span></button>
-                </div>
-                <div class="modal-body">
-                    <form action="suplier" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Nama Suplier</label>
-                                    <input type="text" class="form-control form-white" placeholder="Masukan Nama Suplier"
-                                        type="text" name="namasuplier" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Kontak Suplier</label>
-                                    <input type="text" class="form-control form-white" name="kontaksuplier" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Alamat Suplier</label>
-                            <textarea class="form-control form-white" name="alamatsuplier" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Status</label>
-                            <select class="select form-control form-white" name="status" required>
-                                <option value="1"> AKTIF</option>
-                                <option value="2"> TIDAK AKTIF</option>
-                            </select>
-                        </div>
-                        <div class="submit-section">
-                            <button type="submit" class="btn btn-primary save-category submit-btn"
-                                data-dismiss="modal">Save</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Modal Popup untuk delete-->
     <div class="modal custom-modal fade" id="modal_delete">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title text-center"><b>APAKAH ANDA YAKIN AKAN MENGHAPUS DATA
+                    <h4 class="modal-title" style="text-align: center"><b>APAKAH ANDA YAKIN AKAN MENGHAPUS DATA
                             INI ?</b></h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"><span
                             aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    <form action="identitas" method="POST">
-                        <div class="submit-section">
-                            <a id="delete_link" class="btn btn-danger save-category submit-btn"
-                                data-dismiss="modal">Delete</a>
-                        </div>
-                    </form>
+                    <div class="submit-section">
+                        <a id="delete_link" class="btn btn-danger save-category submit-btn" data-dismiss="modal">Delete</a>
+                    </div>
                 </div>
             </div>
         </div>

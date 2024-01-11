@@ -37,7 +37,7 @@
                         <h5 class="card-title">FORM EDIT KARYAWAN</h5>
                     </div>
                     <div class="card-body">
-                        <form action="/edit-karyawan/{{$listkaryawan->id}}" method="POST">
+                        <form action="/edit-karyawan/{{$listkaryawan->id}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-lg-6">
@@ -58,38 +58,37 @@
                                     <div class="form-group">
                                         <label>Profesi Karyawan</label>
                                         <select class="select" name="profesikaryawan" required>
-                                            <option value="1" @if ($listidentitas->status == "1") selected="selected" @endif> AKTIF</option>
-                                            <option value="2" @if ($listidentitas->status == "2") selected="selected" @endif> TIDAK AKTIF</option>
+                                            @foreach ($profesi as $itemjenisprofesi)
+                                            <option value="{{$itemjenisprofesi->id}}" @if ($listkaryawan->profesi == $itemjenisprofesi->id) selected="selected" @endif>{{$itemjenisprofesi->jenisprofesi}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Kontak Karyawan</label>
-                                        <input type="text" class="form-control" value="{{$listkaryawan->nama}}" name="kontakkaryawan" required>
+                                        <label>Status</label>
+                                        <select class="select" name="status" required>
+                                            <option value="1" @if ($listkaryawan->status == "1") selected="selected" @endif> AKTIF</option>
+                                            <option value="2" @if ($listkaryawan->status == "2") selected="selected" @endif> TIDAK AKTIF</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                            <select class="select" name="status" required>
-                                <option value="1" @if ($listidentitas->status == "1") selected="selected" @endif> AKTIF</option>
-                                <option value="2" @if ($listidentitas->status == "2") selected="selected" @endif> TIDAK AKTIF</option>
-                            </select>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group uploadedimage">
-                                    <label> Profile Picture</label>
-                                    <div class="image-upload image-upload-new">
-                                        <div class="image-uploads">
-                                            <img src="assets/img/customer/customer1.jpg" alt="img">
-                                            <div class="productviews">
-                                                <div class="productviewscontent">
-                                                    <div class="productviewsname">
-                                                        <h2>macbookpro.jpg</h2>
-                                                        <h3>581kb</h3>
-                                                    </div>
-                                                    <a href="javascript:void(0);" class="hideset">x</a>
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div class="form-group">
+                                <label>Alamat Karyawan</label>
+                                <textarea class="form-control form-white" name="alamatkaryawan" required>{{$listkaryawan->alamat}}</textarea>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>	TTD Karyawan</label>
+                                    <div class="custom-file-container" data-upload-id="myFirstImage">
+                                        <label>Foto TTD(PNG/JPG) <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
+                                        <label class="custom-file-container__custom-file" >
+                                            <input type="file" class="custom-file-container__custom-file__custom-file-input" name="ttdkaryawan" accept="image/*">
+                                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                                            <span class="custom-file-container__custom-file__custom-file-control"></span>
+                                        </label>
+                                        <div class="custom-file-container__image-preview"></div>
                                     </div>
                                 </div>
                             </div>
@@ -97,6 +96,16 @@
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="form-group uploadedimage">
+                    <h3 class="page-title">TTD Karyawan</h3>
+                    <div class="image-upload image-upload-new">
+                        <div class="image-uploads">
+                            <img src="{{asset('storage/ttdkaryawan/'.$listkaryawan->ttd)}}" alt="product">
+                        </div>
                     </div>
                 </div>
             </div>
