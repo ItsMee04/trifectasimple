@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfesiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IdentitasController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SuplierController;
 use App\Http\Controllers\UsersController;
@@ -58,6 +59,12 @@ Route::middleware('auth')->group(function () {
         Route::get('edit-kontak/{id}', [KontakController::class, 'show']);
         Route::post('edit-kontak/{id}', [KontakController::class, 'update']);
         Route::get('delete-kontak/{id}', [KontakController::class, 'delete']);
+
+        //<!-- MASTER REFRENSI KATEGORI -->
+        Route::get('kategori', [KategoriController::class, 'index']);
+        Route::post('kategori', [KategoriController::class, 'store']);
+        Route::post('edit-kategori/{id}', [KategoriController::class, 'update']);
+        Route::get('delete-kategori/{id}', [KategoriController::class, 'delete']);
 
         //<!-- MASTER PRODUK BARANG -->
         Route::get('produk', [ProdukController::class, 'index']);
