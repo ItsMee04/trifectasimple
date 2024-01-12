@@ -61,7 +61,7 @@ class KaryawanController extends Controller
     {
         $listkaryawan = KaryawanModel::where('id', $id)->first();
         $profesi = DB::table('profesi')->get();
-        return view('admin.edit-karyawan', ['listkaryawan' => $listkaryawan, 'profesi' => $profesi]);
+        return view('admin.pages.edit-karyawan', ['listkaryawan' => $listkaryawan, 'profesi' => $profesi]);
     }
 
     public function update(Request $request, $id)

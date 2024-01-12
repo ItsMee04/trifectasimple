@@ -89,7 +89,7 @@
                                         <td>
                                             <a class="me-3" href="#">
                                                 <img src="{{ asset('assets') }}/img/icons/edit.svg" alt="img"
-                                                    data-bs-toggle="modal" data-bs-target="#addUsers{{ $item->id }}"
+                                                    data-bs-toggle="modal" data-bs-target="#editKategori{{ $item->id }}"
                                                     data-toggle="tooltip" data-placement="top" title="EDIT DATA">
                                             </a>
                                             <a class="confirm-text" href="javascript:void(0);"
@@ -100,7 +100,7 @@
                                         </td>
                                     </tr>
                                     <!-- MODAL EDIT USERS -->
-                                    @include('admin.edit-kategori')
+                                    @include('admin.modaledit.edit-kategori')
                                 @endforeach
                             </tbody>
                         </table>

@@ -1,24 +1,18 @@
-<div class="modal custom-modal fade" id="addUsers{{ $item->id }}">
+<div class="modal custom-modal fade" id="editProfesi{{ $item->id }}">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">FORM EDIT KATEGORI</h4>
+                <h4 class="modal-title">FORM EDIT PROFESI</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"><span
                         aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body">
-                <form action="/edit-kategori/{{ $item->id }}" method="POST" enctype="multipart/form-data">
+                <form action="/edit-profesi/{{ $item->id }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label>Jenis Kategori</label>
-                        <input type="text" class="form-control form-white" placeholder="Masukan Jenis Kategori"
-                            value="{{ $item->kategori }}" type="text" name="jeniskategori" required>
-                        <input type="hidden" class="form-control form-white" value="{{ $item->id }}" type="text"
-                            name="id" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label>Deskripsi Kategori</label>
-                        <textarea class="form-control form-white" name="deskripsikategori" required>{{ $item->deskripsi }}</textarea>
+                        <label>Jenis Profesi</label>
+                        <input type="text" class="form-control form-white" placeholder="Masukan Jenis Profesi"
+                            value="{{ $item->jenisprofesi }}" type="text" name="jenisprofesi" required>
                     </div>
                     <div class="form-group">
                         <label>Status</label>

@@ -85,9 +85,10 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a class="me-3" href="/edit-kontak/{{ $item->id }}">
+                                            <a class="me-3" href="#">
                                                 <img src="{{ asset('assets') }}/img/icons/edit.svg" alt="img"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="EDIT DATA">
+                                                    data-bs-toggle="modal" data-bs-target="#editKontak{{ $item->id }}"
+                                                    data-toggle="tooltip" data-placement="top" title="EDIT DATA">
                                             </a>
                                             <a class="confirm-text" href="javascript:void(0);"
                                                 onclick="confirm_modal('delete-kontak/{{ $item->id }}');">
@@ -96,6 +97,8 @@
                                             </a>
                                         </td>
                                     </tr>
+                                    <!-- MODAL EDIT USERS -->
+                                    @include('admin.modaledit.edit-kontak')
                                 @endforeach
                             </tbody>
                         </table>

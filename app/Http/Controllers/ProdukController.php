@@ -59,14 +59,14 @@ class ProdukController extends Controller
     public function detailProduk($id)
     {
         $listproduk     = ProdukModel::where('kodeproduk', $id)->first();
-        return view('admin.produk-detail', ['listproduk' => $listproduk]);
+        return view('admin.pages.produk-detail', ['listproduk' => $listproduk]);
     }
 
     public function show($id)
     {
         $listproduk     = ProdukModel::where('id', $id)->first();
         $jenisproduk    = DB::table('jenisproduk')->get();
-        return view('admin.edit-produk', ['listproduk' => $listproduk, 'jenisproduk' => $jenisproduk]);
+        return view('admin.pages.edit-produk', ['listproduk' => $listproduk, 'jenisproduk' => $jenisproduk]);
     }
 
     public function update(Request $request, $id)

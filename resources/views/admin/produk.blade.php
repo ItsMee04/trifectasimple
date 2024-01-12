@@ -99,7 +99,7 @@
                                                 <img src="{{ asset('assets') }}/img/icons/eye.svg" alt="img"
                                                     data-toggle="tooltip" data-placement="top" title="DETAIL DATA">
                                             </a>
-                                            <a class="me-3" href="edit-produk/{{ $item->id }}">
+                                            <a class="me-3" href="/edit-produk/{{ $item->id }}">
                                                 <img src="{{ asset('assets') }}/img/icons/edit.svg" alt="img"
                                                     data-toggle="tooltip" data-placement="top" title="EDIT DATA">
                                             </a>

@@ -96,7 +96,7 @@
                                         </td>
                                     </tr>
                                     <!-- MODAL EDIT USERS -->
-                                    @include('admin.edit-users')
+                                    @include('admin.modaledit.edit-users')
                                 @endforeach
                             </tbody>
                         </table>

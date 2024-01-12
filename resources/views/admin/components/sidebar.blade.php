@@ -17,11 +17,9 @@
                             <a href="javascript:void(0);"
                                 class="
                             @if (request()->route()->uri == 'identitas' ||
-                                    request()->route()->uri == 'edit-identitas/{id}' ||
                                     request()->route()->uri == 'profesi' ||
-                                    request()->route()->uri == 'edit-profesi/{id}' ||
                                     request()->route()->uri == 'kontak' ||
-                                    request()->route()->uri == 'edit-kontak/{id}') active subdrop @endif">
+                                    request()->route()->uri == 'kategori') active subdrop @endif">
                                 <i data-feather="server"></i><span>Refrensi</span><span class="menu-arrow"></span></a>
                             <ul>
                                 <li><a href="/identitas"
