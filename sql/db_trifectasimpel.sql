@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 12, 2024 at 12:28 AM
+-- Generation Time: Jan 12, 2024 at 01:40 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -89,6 +89,27 @@ CREATE TABLE `karyawan` (
 INSERT INTO `karyawan` (`id`, `nama`, `alamat`, `kontak`, `profesi`, `ttd`, `status`) VALUES
 (1, 'Indra Kusuma', 'Purwokerto', '0822-1133-1113', 1, '2024-1704901076.png', 1),
 (3, 'Dimas Anugerah', 'Purbalingga', '0822-1133-1113', 2, '', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kategori`
+--
+
+CREATE TABLE `kategori` (
+  `id` int(11) NOT NULL,
+  `kategori` varchar(55) NOT NULL,
+  `deskripsi` text NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `kategori`
+--
+
+INSERT INTO `kategori` (`id`, `kategori`, `deskripsi`, `status`) VALUES
+(1, 'SURAT', 'PRODUK YANG MENGGUNAKAN SURAT SURAT / PRODUK YANG BERSURAT LENGKAP', 1),
+(2, 'NON SURAT', 'PRODUK YANG TIDAK MENGGUNAKAN / TIDAK BERSURAT', 1);
 
 -- --------------------------------------------------------
 
@@ -270,6 +291,12 @@ ALTER TABLE `karyawan`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `kategori`
+--
+ALTER TABLE `kategori`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `kontak`
 --
 ALTER TABLE `kontak`
@@ -331,6 +358,12 @@ ALTER TABLE `jenisproduk`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `kategori`
+--
+ALTER TABLE `kategori`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
