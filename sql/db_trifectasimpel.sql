@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 12, 2024 at 01:40 PM
+-- Generation Time: Jan 12, 2024 at 05:08 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,35 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_trifectasimpel`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL,
+  `konsumen` int(11) NOT NULL,
+  `produk` int(11) NOT NULL,
+  `qty` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer`
+--
+
+CREATE TABLE `customer` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(55) NOT NULL,
+  `alamat` text NOT NULL,
+  `kontak` varchar(55) NOT NULL,
+  `nik` int(11) NOT NULL,
+  `point` int(11) NOT NULL,
+  `tanggal` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -145,7 +174,7 @@ CREATE TABLE `produk` (
   `id` int(11) NOT NULL,
   `kodeproduk` varchar(55) NOT NULL,
   `namaproduk` varchar(55) NOT NULL,
-  `hargaproduk` bigint(20) NOT NULL,
+  `hargaproduk` decimal(20,0) NOT NULL,
   `keteranganproduk` text NOT NULL,
   `jenisproduk` int(11) NOT NULL,
   `beratproduk` double NOT NULL,
@@ -159,8 +188,8 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id`, `kodeproduk`, `namaproduk`, `hargaproduk`, `keteranganproduk`, `jenisproduk`, `beratproduk`, `karatproduk`, `fotoproduk`, `status`) VALUES
-(1, '96296521983160488', 'Cincin 1', 2500000, 'Cincin 1', 1, 3.5, 24, '2024-1704872263.png', 1),
-(2, '68585906421395912', 'Cincin 2', 2500000, 'Cincin 2', 1, 3.5, 24, '2024-1704872713.png', 1),
+(1, '96296521983160488', 'Cincin 1', 2500000, 'Cincin 1', 1, 3.5, 24, '2024-1705064731.png', 1),
+(2, '68585906421395912', 'Cincin 2', 2500000, 'Cincin 2', 1, 3.5, 24, '2024-1705064814.png', 1),
 (3, '4695133476796014', 'Cincin 3', 2500000, 'Cincin 3', 1, 3.5, 24, '2024-1704894103.png', 1);
 
 -- --------------------------------------------------------
@@ -243,8 +272,23 @@ CREATE TABLE `suplier` (
 --
 
 INSERT INTO `suplier` (`id`, `namasuplier`, `alamatsuplier`, `kontaksuplier`, `status`) VALUES
-(1, 'Central Musik Purwokerto', 'Roxy Square Building\r\nLt LG blok C6 no3 Grogol – Jakarta', '0857-1692-8887', 1),
+(1, 'Central Musik Purwokerto', 'Roxy Square Building\r\nLt LG blok C6 no3 Purwokerto – Banyumas', '0857-1692-8889', 1),
 (3, 'Triple 3 Music', 'Purwokerto', '0857-1692-8887', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaksi`
+--
+
+CREATE TABLE `transaksi` (
+  `id` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `idcart` int(11) NOT NULL,
+  `payment` int(11) NOT NULL,
+  `total` decimal(10,0) NOT NULL,
+  `sales` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -271,6 +315,18 @@ INSERT INTO `users` (`id`, `iduser`, `username`, `password`, `role`, `status`) V
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `identitas`
@@ -333,6 +389,12 @@ ALTER TABLE `suplier`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -341,6 +403,18 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `identitas`
@@ -401,6 +475,12 @@ ALTER TABLE `status`
 --
 ALTER TABLE `suplier`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
