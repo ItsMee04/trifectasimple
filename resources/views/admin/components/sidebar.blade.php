@@ -86,12 +86,12 @@
                                     data-feather="shopping-cart"></i><span>Transaksi</span><span
                                     class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="transferlist.html">Sales Transaksi</a></li>
+                                <li><a href="/sales-transaksi">Sales Transaksi</a></li>
                                 <li><a href="transferlist.html">Transfer Hari Ini</a></li>
                             </ul>
                         </li>
                         <li><a href="invoicereport.html"><i data-feather="file-text"></i><span>Invoices</span></a></li>
-                        <li><a href="pos.html"><i data-feather="hard-drive"></i><span>POS</a></li>
+                        <li><a href="/pos"><i data-feather="hard-drive"></i><span>POS</a></li>
                     </ul>
                 </li>
                 <li class="submenu-open">

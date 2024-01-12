@@ -9,7 +9,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IdentitasController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SuplierController;
 use App\Http\Controllers\UsersController;
 use App\Models\KaryawanModel;
@@ -99,5 +101,11 @@ Route::middleware('auth')->group(function () {
         Route::get('users', [UsersController::class, 'index']);
         Route::post('edit-users/{id}', [UsersController::class, 'update']);
         Route::get('delete-users/{id}', [UsersController::class, 'delete']);
+
+        // <!-- TRANSAKI SALES -->
+        Route::get('sales-transaksi', [SalesController::class, 'index']);
+
+        // <!-- TRANSAKI POS -->
+        Route::get('pos', [PosController::class, 'index']);
     });
 });
