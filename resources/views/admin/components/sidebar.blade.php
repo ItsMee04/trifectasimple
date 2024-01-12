@@ -5,7 +5,7 @@
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">Main</h6>
                     <ul>
-                        <li>
+                        <li class="@if (request()->route()->uri == 'dashboard') active @endif">
                             <a href="/dashboard" ><i data-feather="grid"></i><span>Dashboard</span></a>
                         </li>
                     </ul>								
@@ -14,31 +14,49 @@
                     <h6 class="submenu-hdr">Master Data</h6>
                     <ul>
                         <li class="submenu">
-                            <a href="javascript:void(0);"><i data-feather="server"></i><span>Refrensi</span><span class="menu-arrow"></span></a>
+                            <a href="javascript:void(0);" class="
+                            @if (
+                            request()->route()->uri == 'identitas' || request()->route()->uri == 'edit-identitas/{id}' ||
+                            request()->route()->uri == 'profesi' || request()->route()->uri == 'edit-profesi/{id}' ||
+                            request()->route()->uri == 'kontak' || request()->route()->uri == 'edit-kontak/{id}'
+                            ) 
+                            active @endif subdrop">
+                            <i data-feather="server"></i><span>Refrensi</span><span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="/identitas">Identitas</a></li>
-                                <li><a href="/profesi">Profesi</a></li>
-                                <li><a href="/kontak">Kontak</a></li>
+                                <li><a href="/identitas" class="@if (request()->route()->uri == 'identitas'|| request()->route()->uri == 'edit-identitas/{id}') active @endif">Identitas</a></li>
+                                <li><a href="/profesi" class="@if (request()->route()->uri == 'profesi'|| request()->route()->uri == 'edit-profesi/{id}') active @endif">Profesi</a></li>
+                                <li><a href="/kontak" class="@if (request()->route()->uri == 'kontak'|| request()->route()->uri == 'edit-kontak/{id}') active @endif">Kontak</a></li>
                             </ul>
                         </li>
                         <li class="submenu">
-                            <a href="javascript:void(0);"><i data-feather="box"></i><span>Produk Barang</span><span class="menu-arrow"></span></a>
+                            <a href="javascript:void(0);" class="
+                            @if (
+                            request()->route()->uri == 'produk' || request()->route()->uri == 'edit-produk/{id}' || request()->route()->uri == 'produk-detail/{id}' ||
+                            request()->route()->uri == 'scanbarcode' 
+                            ) 
+                            active @endif subdrop"><i data-feather="box"></i><span>Produk Barang</span><span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="/produk">Produk Barang</a></li>
-                                <li><a href="/scanbarcode">Scan Barcode</a></li>
+                                <li><a href="/produk" class="@if (request()->route()->uri == 'produk'|| request()->route()->uri == 'edit-produk/{id}' || request()->route()->uri == 'produk-detail/{id}') active @endif">Produk Barang</a></li>
+                                <li><a href="/scanbarcode" class="@if (request()->route()->uri == 'scanbarcode') active @endif">Scan Barcode</a></li>
                             </ul>
                         </li>
-                        <li><a href="/suplier"><i data-feather="codepen"></i><span>Suplier</span></a></li>
+                        <li><a href="/suplier" class="@if (request()->route()->uri == 'suplier' || request()->route()->uri == 'edit-suplier/{id}') active @endif"><i data-feather="codepen"></i><span>Suplier</span></a></li>
                     </ul>								
                 </li>
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">User Management</h6>		
                     <ul>
                         <li class="submenu">
-                            <a href="javascript:void(0);"><i data-feather="users"></i><span>Manage Users</span><span class="menu-arrow"></span></a>
+                            <a href="javascript:void(0);" class="
+                            @if (
+                            request()->route()->uri == 'karyawan' || request()->route()->uri == 'edit-karyawan/{id}' ||
+                            request()->route()->uri == 'users' || request()->route()->uri == 'edit-users/{id}' ||
+                            request()->route()->uri == 'kontak' || request()->route()->uri == 'edit-kontak/{id}'
+                            ) 
+                            active @endif subdrop"><i data-feather="users"></i><span>Manage Users</span><span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="/karyawan">Karyawan </a></li>
-                                <li><a href="/users">Users Karyawan</a></li>
+                                <li><a href="/karyawan" class="@if (request()->route()->uri == 'karyawan'|| request()->route()->uri == 'edit-karyawan/{id}') active @endif">Karyawan </a></li>
+                                <li><a href="/users" class="@if (request()->route()->uri == 'users') active @endif">Users Karyawan</a></li>
                             </ul>
                         </li>
                     </ul>

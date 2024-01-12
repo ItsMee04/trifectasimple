@@ -185,7 +185,7 @@
             <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                 <span class="user-info">
                     <span class="user-letter">
-                        <img src="{{ asset('assets') }}/img/profiles/avator1.jpg" alt="" class="img-fluid">
+                        <img src="{{ asset('assets') }}/img/avatar.jpg" alt="" class="img-fluid">
                     </span>
                     <span class="user-detail">
                         <span class="user-name">{{ Session::get('nama') }}</span>
@@ -196,12 +196,12 @@
             <div class="dropdown-menu menu-drop-user">
                 <div class="profilename">
                     <div class="profileset">
-                        <span class="user-img"><img src="{{ asset('assets') }}/img/profiles/avator1.jpg"
+                        <span class="user-img"><img src="{{ asset('assets') }}/img/avatar.jpg"
                                 alt="">
                             <span class="status online"></span></span>
                         <div class="profilesets">
-                            <h6>{{ Auth::user()->username }}</h6>
-                            <h5>Super Admin</h5>
+                            <h6>{{ Session::get('nama') }}</h6>
+                            <h5>{{ Session::get('role') }}</h5>
                         </div>
                     </div>
                     <hr class="m-0">

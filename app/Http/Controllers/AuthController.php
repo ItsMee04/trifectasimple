@@ -35,8 +35,11 @@ class AuthController extends Controller
                     $profesi        = KaryawanModel::where('id', Auth::user()->iduser)->first()->profesi;
                     $dataprofesi    = ProfesiModel::where('id', $profesi)->first()->jenisprofesi;
 
+                    $role           = DB::table('role')->select('role')->where('id',Auth::user()->role)->first()->role;
+
                     Session::put('nama', $nama);
                     Session::put('profesi', $dataprofesi);
+                    Session::put('role',$role);
                     return redirect('dashboard');
                 }
             }
@@ -46,11 +49,12 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        session()->forget('nama');
+        session()->forget('profesi');
+        session()->forget('role');
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('login');
-        session()->forget('nama');
-        session()->forget('profesi');
     }
 }
