@@ -25,10 +25,6 @@
                         <div class="card-body">
                             <div class="bar-code-view">
                                 {!! DNS2D::getBarcodeSVG($listproduk->kodeproduk, 'QRCODE') !!}
-                                <a class="printimg" href="/printbarcode/{{ $listproduk->kodeproduk }}" target="_blank">
-                                    <button type="button" class="btn btn-rounded btn-dark" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Print Barcode"><i class="fas fa-print"></i></button>
-                                </a>
                             </div>
                             <div class="productdetails">
                                 <ul class="product-bar">
@@ -56,6 +52,20 @@
                                         <h4>Karat Produk</h4>
                                         <h6>{{ $listproduk->karatproduk }}</h6>
                                     </li>
+                                </ul>
+                                <br>
+                                <ul>
+                                    <a class="printimg" href="/printbarcode/{{ $listproduk->kodeproduk }}" target="_blank">
+                                        <button type="button" class="btn btn-rounded btn-dark" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Print Barcode"><i class="fas fa-print"> Print
+                                                Barcode</i></button>
+                                    </a>
+
+                                    <a class="printimg" href="/tambah-cart/{{ $listproduk->kodeproduk }}" target="_blank">
+                                        <button type="button" class="btn btn-rounded btn-dark" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Add To Cart"><i class="fas fa-shopping-cart"> Add
+                                                To Cart</i></button>
+                                    </a>
                                 </ul>
                             </div>
                         </div>
