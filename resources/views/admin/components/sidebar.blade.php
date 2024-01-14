@@ -53,6 +53,8 @@
                         </li>
                         <li><a href="/suplier" class="@if (request()->route()->uri == 'suplier' || request()->route()->uri == 'edit-suplier/{id}') active @endif"><i
                                     data-feather="codepen"></i><span>Suplier</span></a></li>
+                        <li><a href="/customer" class="@if (request()->route()->uri == 'customer' || request()->route()->uri == 'edit-customer/{id}') active @endif"><i
+                                    data-feather="users"></i><span>Customer</span></a></li>
                     </ul>
                 </li>
                 <li class="submenu-open">

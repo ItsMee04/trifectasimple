@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarcodeController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\ProfesiController;
 use App\Http\Controllers\DashboardController;
@@ -89,7 +90,13 @@ Route::middleware('auth')->group(function () {
         Route::post('edit-suplier/{id}', [SuplierController::class, 'update']);
         Route::get('delete-suplier/{id}', [SuplierController::class, 'delete']);
 
-        //<!-- MASTER KARYAWAN -->
+        //<!-- MASTER SUPPLIER -->
+        Route::get('customer', [CustomerController::class, 'index']);
+        Route::post('customer', [CustomerController::class, 'store']);
+        Route::post('edit-customer/{id}', [CustomerController::class, 'update']);
+        Route::get('delete-customer/{id}', [CustomerController::class, 'delete']);
+
+        //<!-- MANAGEMENT USERS -->
         Route::get('karyawan', [KaryawanController::class, 'index']);
         Route::post('karyawan', [KaryawanController::class, 'store']);
         Route::get('edit-karyawan/{id}', [KaryawanController::class, 'show']);
@@ -97,7 +104,7 @@ Route::middleware('auth')->group(function () {
         Route::post('users-karyawan/{id}', [KaryawanController::class, 'usersKaryawan']);
         Route::get('delete-karyawan/{id}', [KaryawanController::class, 'delete']);
 
-        //<!-- MASTER KARYAWAN -->
+        //<!-- MANAGEMENT USERS -->
         Route::get('users', [UsersController::class, 'index']);
         Route::post('edit-users/{id}', [UsersController::class, 'update']);
         Route::get('delete-users/{id}', [UsersController::class, 'delete']);
