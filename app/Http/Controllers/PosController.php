@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CartModel;
 use App\Models\CustomerModel;
 use App\Models\ProdukModel;
 use Illuminate\Http\Request;
@@ -28,13 +29,29 @@ class PosController extends Controller
         $idTransaksi = $dt . $random;
 
         $listcustomer = CustomerModel::all();
+
+        $listcart  = DB::table('cart')
+        ->select('produk.*','cart.*')
+        ->leftjoin('produk','cart.produk','produk.id')
+        ->where('cart.status',1)
+        ->get();
+        $countcart = CartModel::count('status',1); 
+
+        $subtotal = DB::table('produk')
+        ->join('cart','produk.id','=','cart.produk')
+        ->where('cart.status',1)
+        ->sum('produk.hargaproduk');
+        
         return view('admin.pos', [
-            'listcincin' => $listcincin,
-            'listanting' => $listanting,
-            'listgelang' => $listgelang,
-            'listkalung' => $listkalung,
-            'idTransaksi' => $idTransaksi,
-            'listcustomer' => $listcustomer,
+            'listcincin'    => $listcincin,
+            'listanting'    => $listanting,
+            'listgelang'    => $listgelang,
+            'listkalung'    => $listkalung,
+            'idTransaksi'   => $idTransaksi,
+            'listcustomer'  => $listcustomer,
+            'listcart'      => $listcart,
+            'countcart'     => $countcart,
+            'subtotal'      => $subtotal
         ]);
     }
 }

@@ -75,9 +75,9 @@
                                                 </div>
                                             </div>
                                             <div class="productsetcontent">
-                                                <h5>Headphones</h5>
-                                                <h4>Earphones</h4>
-                                                <h6>150.00</h6>
+                                                <h5>{{ $itemanting->namaproduk }}</h5>
+                                                <h4>{{ $itemanting->keteranganproduk }}</h4>
+                                                <h6>{{ 'Rp' . ' ' . number_format($itemanting->hargaproduk) }}</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -97,9 +97,9 @@
                                                 </div>
                                             </div>
                                             <div class="productsetcontent">
-                                                <h5>Accessories</h5>
-                                                <h4>Sunglasses</h4>
-                                                <h6>15.00</h6>
+                                                <h5>{{ $itemgelang->namaproduk }}</h5>
+                                                <h4>{{ $itemgelang->keteranganproduk }}</h4>
+                                                <h6>{{ 'Rp' . ' ' . number_format($itemgelang->hargaproduk) }}</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -119,9 +119,9 @@
                                                 </div>
                                             </div>
                                             <div class="productsetcontent">
-                                                <h5>Shoes</h5>
-                                                <h4>Red nike</h4>
-                                                <h6>1500.00</h6>
+                                                <h5>{{ $itemkalung->namaproduk }}</h5>
+                                                <h4>{{ $itemkalung->keteranganproduk }}</h4>
+                                                <h6>{{ 'Rp' . ' ' . number_format($itemkalung->hargaproduk) }}</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -170,36 +170,42 @@
                         </div>
                         <div class="card-body pt-0">
                             <div class="totalitem">
-                                <h4>Total items : 4</h4>
-                                <a href="javascript:void(0);">Clear all</a>
+                                <h4>Total items : {{$countcart}}</h4>
+                                <a href="/delete-all-cart">Clear all</a>
                             </div>
                             <div class="product-table">
+                                @foreach ($listcart as $item)
                                 <ul class="product-lists">
                                     <li>
                                         <div class="productimg">
 
                                             <div class="productimgs">
-                                                <img src="{{ asset('assets') }}/img/product/product30.jpg" alt="img">
+                                                <img src="{{ asset('storage/fotoproduk/' . $item->fotoproduk) }}">
                                             </div>
                                             <div class="productcontet">
-                                                <h4>Pineapple
+                                                <h4>{{$item->namaproduk}}
                                                     <a href="javascript:void(0);" class="ms-2" data-bs-toggle="modal"
                                                         data-bs-target="#edit"><img
                                                             src="{{ asset('assets') }}/img/icons/edit-5.svg"
                                                             alt="img"></a>
                                                 </h4>
                                                 <div class="productlinkset">
-                                                    <h5>PT001</h5>
+                                                    <h5>{{$item->kodeproduk}}</h5>
                                                 </div>
                                             </div>
 
                                         </div>
                                     </li>
-                                    <li>3000.00 </li>
-                                    <li><a class="confirm-text" href="javascript:void(0);"><img
-                                                src="{{ asset('assets') }}/img/icons/delete-2.svg" alt="img"></a>
+                                    <li>{{"Rp."." ".number_format($item->hargaproduk)}}</li>
+                                    <li>
+                                        <a class="confirm-text" href="javascript:void(0);"
+                                        onclick="confirm_modal('delete-cart/{{ $item->id }}');">
+                                        <img src="{{ asset('assets') }}/img/icons/delete.svg" alt="img"
+                                            data-toggle="tooltip" data-placement="top" title="DELETE DATA">
+                                    </a>
                                     </li>
                                 </ul>
+                                @endforeach
                             </div>
                         </div>
                         <div class="card-body pt-0 pb-0">
@@ -207,15 +213,11 @@
                                 <ul>
                                     <li>
                                         <h5>Subtotal </h5>
-                                        <h6>55.00$</h6>
-                                    </li>
-                                    <li>
-                                        <h5>Tax </h5>
-                                        <h6>5.00$</h6>
+                                        <h6>{{"Rp."." ".number_format($subtotal)}}</h6>
                                     </li>
                                     <li class="total-value">
                                         <h5>Total </h5>
-                                        <h6>60.00$</h6>
+                                        <h6>{{"Rp."." ".number_format($subtotal)}}</h6>
                                     </li>
                                 </ul>
                             </div>
@@ -225,7 +227,7 @@
                                         <h5>Checkout</h5>
                                     </button>
                                 </a>
-                                <h6>60.00$</h6>
+                                <h6>{{"Rp."." ".number_format($subtotal)}}</h6>
                             </div>
                         </div>
                     </div>
@@ -235,4 +237,35 @@
     </div>
 
     @include('admin.modalpos.modal-pos')
+
+    <!-- Modal Popup untuk delete-->
+    <div class="modal custom-modal fade" id="modal_delete">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center"><b>APAKAH ANDA YAKIN AKAN MENGHAPUS DATA
+                            INI ?</b></h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"><span
+                            aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <form action="identitas" method="POST">
+                        <div class="submit-section">
+                            <a id="delete_link" class="btn btn-danger save-category submit-btn"
+                                data-dismiss="modal">Delete</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Javascript untuk popup modal Delete-->
+    <script type="text/javascript">
+        function confirm_modal(delete_url) {
+            $('#modal_delete').modal('show', {
+                backdrop: 'static'
+            });
+            document.getElementById('delete_link').setAttribute('href', delete_url);
+        }
+    </script>
 @endsection

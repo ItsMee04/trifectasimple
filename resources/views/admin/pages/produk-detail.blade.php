@@ -56,13 +56,13 @@
                                 <br>
                                 <ul>
                                     <a class="printimg" href="/printbarcode/{{ $listproduk->kodeproduk }}" target="_blank">
-                                        <button type="button" class="btn btn-rounded btn-dark" data-bs-toggle="tooltip"
+                                        <button type="button" class="btn btn-rounded btn-submit" data-bs-toggle="tooltip"
                                             data-bs-placement="top" title="Print Barcode"><i class="fas fa-print"> Print
                                                 Barcode</i></button>
                                     </a>
 
                                     <a class="printimg" href="/tambah-cart/{{ $listproduk->kodeproduk }}" target="_blank">
-                                        <button type="button" class="btn btn-rounded btn-dark" data-bs-toggle="tooltip"
+                                        <button type="button" class="btn btn-rounded btn-cancel" data-bs-toggle="tooltip"
                                             data-bs-placement="top" title="Add To Cart"><i class="fas fa-shopping-cart"> Add
                                                 To Cart</i></button>
                                     </a>
