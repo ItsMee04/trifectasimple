@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CustomerModel;
 use App\Models\ProdukModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -59,7 +60,8 @@ class ProdukController extends Controller
     public function detailProduk($id)
     {
         $listproduk     = ProdukModel::where('kodeproduk', $id)->first();
-        return view('admin.pages.produk-detail', ['listproduk' => $listproduk]);
+        $listcustomer   = CustomerModel::all();
+        return view('admin.pages.produk-detail', ['listproduk' => $listproduk, 'listcustomer'=>$listcustomer]);
     }
 
     public function show($id)

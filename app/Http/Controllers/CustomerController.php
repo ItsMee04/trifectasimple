@@ -32,7 +32,7 @@ class CustomerController extends Controller
                 'kontakcustomer'    =>  $request->kontakcustomer,
                 'nikcustomer'       =>  $request->nikcustomer,
                 'tanggalcustomer'   =>  $request->tanggalcustomer,
-                'alamatcustomer'    =>  $request->kontakcustomer,
+                'alamatcustomer'    =>  $request->alamatcustomer,
                 'status'            => $request->status
             ]
         );
@@ -60,7 +60,7 @@ class CustomerController extends Controller
                     'kontakcustomer'    =>  $request->kontakcustomer,
                     'nikcustomer'       =>  $request->nikcustomer,
                     'tanggalcustomer'   =>  $request->tanggalcustomer,
-                    'alamatcustomer'    =>  $request->kontakcustomer,
+                    'alamatcustomer'    =>  $request->alamatcustomer,
                     'pointcustomer'     =>  $request->pointcustomer,
                     'status'            => $request->status
                 ]

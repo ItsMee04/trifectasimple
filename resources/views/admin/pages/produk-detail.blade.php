@@ -61,7 +61,8 @@
                                                 Barcode</i></button>
                                     </a>
 
-                                    <a class="printimg" href="/tambah-cart/{{ $listproduk->kodeproduk }}" target="_blank">
+                                    <a class="printimg" href="/tambah-cart/{{ $listproduk->kodeproduk }}" data-bs-toggle="modal"
+                                        data-bs-target="#create">
                                         <button type="button" class="btn btn-rounded btn-cancel" data-bs-toggle="tooltip"
                                             data-bs-placement="top" title="Add To Cart"><i class="fas fa-shopping-cart"> Add
                                                 To Cart</i></button>
@@ -90,4 +91,53 @@
         </div>
     </div>
 
+    <div class="modal fade" id="create" tabindex="-1" aria-labelledby="create" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambah Customer</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="customer" method="POST">
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Nama Customer</label>
+                                <select class="select form-control form-white" name="customer" required>
+                                    @foreach ($listcustomer as $itemcustomer)
+                                        <option value="{{$itemcustomer->id}}">{{$itemcustomer->customer}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>NIK Customer</label>
+                                <input type="text" class="form-control form-white" name="nikcustomer"
+                                    placeholder="Masukan NIK Customer" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Kontak Customer</label>
+                                <input type="text" class="form-control form-white" name="kontakcustomer"
+                                    placeholder="Masukan Kontak Customer" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal Lahir Customer</label>
+                                <input type="date" class="form-control form-white" name="tanggallahircustomer"
+                                    placeholder="Masukan Kontak Customer" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Alamat</label>
+                                <textarea class="form-control form-white" placeholder="Masukan Alamat" name="alamatcustomer"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <a class="btn btn-submit me-2">Submit</a>
+                            <a class="btn btn-cancel" data-bs-dismiss="modal">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

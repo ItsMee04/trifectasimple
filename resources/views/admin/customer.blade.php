@@ -68,9 +68,9 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Nama</th>
-                                    <th>Alamat</th>
+                                    <th>NIK</th>
+                                    <th>Alamat </th>
                                     <th>Kontak </th>
-                                    <th>Profesi </th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>

@@ -147,7 +147,7 @@
                                 <div class="col-lg-12">
                                     <div class="select-split ">
                                         <div class="select-group w-100">
-                                            <select class="select">
+                                            <select class="select" name="namacustomer">
                                                 @foreach ($listcustomer as $itemcustomer)
                                                     <option value="{{ $itemcustomer->id }}">
                                                         {{ $itemcustomer->namacustomer }}</option>

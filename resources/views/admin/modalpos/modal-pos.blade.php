@@ -167,6 +167,7 @@
             </div>
             <div class="modal-body">
                 <form action="customer" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="form-group">
                             <label>Nama Customer</label>
@@ -194,7 +195,7 @@
                         </div>
                     </div>
                     <div class="col-lg-12">
-                        <a class="btn btn-submit me-2">Submit</a>
+                        <button type="submit" class="btn btn-submit me-2">Submit</button>
                         <a class="btn btn-cancel" data-bs-dismiss="modal">Cancel</a>
                     </div>
                 </form>
