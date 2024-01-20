@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 12, 2024 at 05:08 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Jan 20, 2024 at 07:15 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,10 +29,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
-  `konsumen` int(11) NOT NULL,
+  `customer` int(11) DEFAULT NULL,
   `produk` int(11) NOT NULL,
-  `qty` int(11) NOT NULL
+  `qty` int(11) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `customer`, `produk`, `qty`, `status`) VALUES
+(1, NULL, 7, 1, 1),
+(2, NULL, 9, NULL, 1),
+(3, NULL, 8, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -42,13 +52,22 @@ CREATE TABLE `cart` (
 
 CREATE TABLE `customer` (
   `id` int(11) NOT NULL,
-  `nama` varchar(55) NOT NULL,
-  `alamat` text NOT NULL,
-  `kontak` varchar(55) NOT NULL,
-  `nik` int(11) NOT NULL,
-  `point` int(11) NOT NULL,
-  `tanggal` date NOT NULL
+  `namacustomer` varchar(55) NOT NULL,
+  `alamatcustomer` text NOT NULL,
+  `kontakcustomer` varchar(55) NOT NULL,
+  `nikcustomer` bigint(20) NOT NULL,
+  `pointcustomer` int(11) NOT NULL DEFAULT 0,
+  `tanggalcustomer` date NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`id`, `namacustomer`, `alamatcustomer`, `kontakcustomer`, `nikcustomer`, `pointcustomer`, `tanggalcustomer`, `status`) VALUES
+(1, 'Dimas Anugerah', 'Purbalingga', '0812-0000-2222', 330228808012121, 0, '2024-01-20', 1),
+(2, 'Adit', 'Purwokerto', '0812-0000-2222', 330228808012121, 0, '2024-01-20', 1);
 
 -- --------------------------------------------------------
 
@@ -93,7 +112,9 @@ CREATE TABLE `jenisproduk` (
 
 INSERT INTO `jenisproduk` (`id`, `jenis`, `status`) VALUES
 (1, 'CINCIN', 1),
-(2, 'KALUNG', 1);
+(2, 'KALUNG', 1),
+(3, 'GELANG', 1),
+(4, 'ANTING', 1);
 
 -- --------------------------------------------------------
 
@@ -188,9 +209,15 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id`, `kodeproduk`, `namaproduk`, `hargaproduk`, `keteranganproduk`, `jenisproduk`, `beratproduk`, `karatproduk`, `fotoproduk`, `status`) VALUES
-(1, '96296521983160488', 'Cincin 1', 2500000, 'Cincin 1', 1, 3.5, 24, '2024-1705064731.png', 1),
-(2, '68585906421395912', 'Cincin 2', 2500000, 'Cincin 2', 1, 3.5, 24, '2024-1705064814.png', 1),
-(3, '4695133476796014', 'Cincin 3', 2500000, 'Cincin 3', 1, 3.5, 24, '2024-1704894103.png', 1);
+(4, '44852215609137509', 'Cincin 1', 2500000, 'Cincin 1', 1, 3.5, 24, '2024-1705286373.png', 1),
+(5, '73990597627436009', 'Cincin 2', 2500000, 'Cincin 2', 1, 3.5, 24, '2024-1705286391.png', 1),
+(6, '89465531448365380', 'Cincin 3', 2500000, 'Cincin 3', 1, 3.5, 24, '2024-1705286408.png', 1),
+(7, '9226656419886110', 'Kalung 1', 2500000, 'Kalung 1', 2, 3.5, 24, '2024-1705286621.png', 1),
+(8, '1177745372027653', 'Kalung 2', 2500000, 'Kalung 2', 2, 3.5, 24, '2024-1705286652.png', 1),
+(9, '67012908316606076', 'Kalung 3', 2500000, 'Kalung 3', 2, 3.5, 24, '2024-1705286677.png', 1),
+(10, '31980908491484474', 'Gelang 1', 2500000, 'Gelang 1', 3, 3.5, 24, '2024-1705287538.png', 1),
+(11, '86329771565751904', 'Gelang 2', 2500000, 'Gelang 2', 3, 3.5, 24, '2024-1705287576.png', 1),
+(12, '95321884073739879', 'Anting 1', 2500000, 'Anting 1', 4, 3.5, 24, '2024-1705287812.png', 1);
 
 -- --------------------------------------------------------
 
@@ -201,18 +228,20 @@ INSERT INTO `produk` (`id`, `kodeproduk`, `namaproduk`, `hargaproduk`, `keterang
 CREATE TABLE `profesi` (
   `id` int(11) NOT NULL,
   `jenisprofesi` varchar(55) NOT NULL,
-  `status` int(11) NOT NULL
+  `status` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `update_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `profesi`
 --
 
-INSERT INTO `profesi` (`id`, `jenisprofesi`, `status`) VALUES
-(1, 'KEPALA TOKO', 1),
-(2, 'KARYAWAN', 1),
-(3, 'MARKETING', 1),
-(5, 'KASIR', 1);
+INSERT INTO `profesi` (`id`, `jenisprofesi`, `status`, `created_at`, `update_at`) VALUES
+(1, 'KEPALA TOKO', 1, '2024-01-01 04:07:28', '2024-01-19 14:11:59'),
+(2, 'KARYAWAN', 1, '2024-01-01 06:07:46', '2024-01-19 14:12:02'),
+(3, 'MARKETING', 1, '2024-01-19 07:07:52', '2024-01-19 14:12:05'),
+(5, 'KASIR', 1, '2024-01-01 07:08:07', '2024-01-19 14:12:07');
 
 -- --------------------------------------------------------
 
@@ -310,7 +339,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `iduser`, `username`, `password`, `role`, `status`) VALUES
-(1, 1, 'indrakusuma', '$2y$12$.Qw/y33owwFeOPBYKLUxOOB1ESywtNqHUxNskTzhKYw/NrdSAXoIC', 1, 1);
+(1, 1, 'indrakusuma', '$2y$12$.Qw/y33owwFeOPBYKLUxOOB1ESywtNqHUxNskTzhKYw/NrdSAXoIC', 1, 1),
+(4, 3, 'dimas', '$2y$12$ADoZRBq9GZYoxRrlHrSbheVcxyTZP0gZdupL7H36QsgiqCdWSZ5Vi', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -408,13 +438,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `identitas`
@@ -426,7 +456,7 @@ ALTER TABLE `identitas`
 -- AUTO_INCREMENT for table `jenisproduk`
 --
 ALTER TABLE `jenisproduk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `karyawan`
@@ -450,7 +480,7 @@ ALTER TABLE `kontak`
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `profesi`
@@ -486,7 +516,7 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
