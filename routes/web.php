@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarcodeController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\ProfesiController;
@@ -109,10 +110,18 @@ Route::middleware('auth')->group(function () {
         Route::post('edit-users/{id}', [UsersController::class, 'update']);
         Route::get('delete-users/{id}', [UsersController::class, 'delete']);
 
+
+        // <!-- TRANSAKSI CART -->
+        Route::get('cart-transaksi',[CartController::class, 'index']);
+        Route::get('add-cart/{id}',[CartController::class, 'store']);
+        
         // <!-- TRANSAKI SALES -->
         Route::get('sales-transaksi', [SalesController::class, 'index']);
 
         // <!-- TRANSAKI POS -->
         Route::get('pos', [PosController::class, 'index']);
+        Route::get('delete-pos/{id}', [PosController::class, 'deletePos']);
+        Route::get('delete-all-pos/{id}', [PosController::class, 'deleteAllPos']);
+        Route::post('checkout',[PosController::class, 'checkout']);
     });
 });

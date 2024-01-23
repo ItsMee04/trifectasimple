@@ -88,8 +88,8 @@
                                     data-feather="shopping-cart"></i><span>Transaksi</span><span
                                     class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="/sales-transaksi">Sales Transaksi</a></li>
-                                <li><a href="transferlist.html">Transfer Hari Ini</a></li>
+                                <li><a href="/cart-transaksi">Cart Transaksi</a></li>
+                                <li><a href="transferlist.html">Data Transaksi</a></li>
                             </ul>
                         </li>
                         <li><a href="invoicereport.html"><i data-feather="file-text"></i><span>Invoices</span></a></li>

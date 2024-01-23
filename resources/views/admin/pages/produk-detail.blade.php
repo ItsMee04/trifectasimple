@@ -61,8 +61,7 @@
                                                 Barcode</i></button>
                                     </a>
 
-                                    <a class="printimg" href="/tambah-cart/{{ $listproduk->kodeproduk }}" data-bs-toggle="modal"
-                                        data-bs-target="#create">
+                                    <a class="printimg" href="/add-cart/{{ $listproduk->kodeproduk }}">
                                         <button type="button" class="btn btn-rounded btn-cancel" data-bs-toggle="tooltip"
                                             data-bs-placement="top" title="Add To Cart"><i class="fas fa-shopping-cart"> Add
                                                 To Cart</i></button>

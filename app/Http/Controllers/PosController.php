@@ -6,6 +6,7 @@ use App\Models\CartModel;
 use App\Models\CustomerModel;
 use App\Models\ProdukModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PosController extends Controller
@@ -24,9 +25,12 @@ class PosController extends Controller
         $produkkalung = DB::table('jenisproduk')->select('id')->where('jenis', 'KALUNG');
         $listkalung = ProdukModel::where('jenisproduk', $produkkalung)->get();
 
-        $random = rand(0, 99999999);
-        $dt = date('Y');
-        $idTransaksi = $dt . $random;
+        $listcartaktif = DB::table('cart')
+        ->where('sales',Auth::user()->id)
+        ->where('status',1)
+        ->latest('idcart')
+        ->first();
+        
 
         $listcustomer = CustomerModel::all();
 
@@ -41,17 +45,56 @@ class PosController extends Controller
         ->join('cart','produk.id','=','cart.produk')
         ->where('cart.status',1)
         ->sum('produk.hargaproduk');
+
+        $idTransaksi = DB::table('transaksi')
+        ->latest('idcart')
+        ->first();
+
+        $id = "T-";
+        $tahun = date('Y');
+
+        if($idTransaksi == null)
+        {
+            $nourut = "000001";
+            $idcart = $id.$tahun.$nourut;
+        }else
+        {
+            $nourut = substr($idTransaksi->idtransaksi, 6,6)+1;
+            $nourut = str_pad($nourut, 6,"0", STR_PAD_LEFT);
+
+            $idcart = $id.$tahun.$nourut;
+        }
         
         return view('admin.pos', [
             'listcincin'    => $listcincin,
             'listanting'    => $listanting,
             'listgelang'    => $listgelang,
             'listkalung'    => $listkalung,
-            'idTransaksi'   => $idTransaksi,
             'listcustomer'  => $listcustomer,
             'listcart'      => $listcart,
             'countcart'     => $countcart,
-            'subtotal'      => $subtotal
+            'idtransaksi'   => $idcart,
+            'subtotal'      => $subtotal,
+            'listcartaktif' => $listcartaktif
         ]);
+    }
+
+    public function deletePos($id)
+    {
+        $listcart = CartModel::where('id',$id)->delete();
+
+        return redirect('pos')->with('success','Data Berhasil Dihapus !');
+    }
+
+    public function deleteAllPos($id)
+    {
+        $listcart = CartModel::where('idcart',$id)->delete();
+
+        return redirect('pos')->with('success','Data Berhasil Dihapus !');
+    }
+
+    public function checkout(Request $request)
+    {
+        dd($request);
     }
 }
