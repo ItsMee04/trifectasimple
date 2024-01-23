@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2024 at 07:15 AM
+-- Generation Time: Jan 23, 2024 at 05:00 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,9 +29,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
-  `customer` int(11) DEFAULT NULL,
+  `idcart` varchar(55) NOT NULL,
   `produk` int(11) NOT NULL,
   `qty` int(11) DEFAULT NULL,
+  `sales` int(11) NOT NULL,
   `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -39,10 +40,9 @@ CREATE TABLE `cart` (
 -- Dumping data for table `cart`
 --
 
-INSERT INTO `cart` (`id`, `customer`, `produk`, `qty`, `status`) VALUES
-(1, NULL, 7, 1, 1),
-(2, NULL, 9, NULL, 1),
-(3, NULL, 8, NULL, 1);
+INSERT INTO `cart` (`id`, `idcart`, `produk`, `qty`, `sales`, `status`) VALUES
+(12, 'C-2024000001', 4, NULL, 1, 1),
+(13, 'C-2024000001', 6, NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -312,11 +312,14 @@ INSERT INTO `suplier` (`id`, `namasuplier`, `alamatsuplier`, `kontaksuplier`, `s
 
 CREATE TABLE `transaksi` (
   `id` int(11) NOT NULL,
-  `tanggal` date NOT NULL,
+  `idtransaksi` varchar(55) NOT NULL,
   `idcart` int(11) NOT NULL,
+  `customer` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
   `payment` int(11) NOT NULL,
-  `total` decimal(10,0) NOT NULL,
-  `sales` int(11) NOT NULL
+  `total` decimal(20,0) NOT NULL,
+  `sales` int(11) NOT NULL,
+  `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -438,7 +441,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `customer`
