@@ -14,6 +14,17 @@
                             <h6>Manage your purchases</h6>
                         </div>
                     </div>
+                    @if ($errors->any())
+                        <div class="col-md-3">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                @foreach ($errors->all() as $error)
+                                    <strong>Peringatan !</strong>
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    @endif
                     <ul class=" tabs owl-carousel owl-theme owl-product  border-0 ">
                         <li id="cincin">
                             <div class="product-details ">
@@ -56,7 +67,7 @@
                                                 <h5>{{ $itemcincin->namaproduk }}</h5>
                                                 <h4>{{ $itemcincin->keteranganproduk }}</h4>
                                                 <h6>{{ 'Rp' . ' ' . number_format($itemcincin->hargaproduk) }}</h6>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -150,8 +161,8 @@
                                     <div class="col-lg-12">
                                         <div class="select-split ">
                                             <div class="select-group w-100">
-                                                <select class="select" name="namacustomer">
-                                                    <option> Pilih Customer</option>
+                                                <select class="select" name="namacustomer" required>
+                                                    <option disabled selected hidden> Pilih Customer</option>
                                                     @foreach ($listcustomer as $itemcustomer)
                                                         <option value="{{ $itemcustomer->id }}">
                                                             {{ $itemcustomer->namacustomer }}</option>
@@ -163,8 +174,8 @@
                                     <div class="col-lg-12">
                                         <div class="select-split ">
                                             <div class="select-group w-100">
-                                                <select class="select" name="payments">
-                                                    <option> Pilih Pembayaran</option>
+                                                <select class="select" name="payments" required>
+                                                    <option disabled selected hidden> Pilih Pembayaran</option>
                                                     <option value="1"> Cash </option>
                                                     <option value="2"> Transfer </option>
                                                 </select>
@@ -174,7 +185,7 @@
                                     <div class="col-lg-12">
                                         <div class="select-split">
                                             <div class="select-group w-100">
-                                                <textarea class="form-control" name="keterangan" placeholder="Masukan Keterangan"></textarea>
+                                                <textarea class="form-control" name="keterangan" placeholder="Masukan Keterangan" required></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -184,45 +195,44 @@
                             </div>
                             <div class="card-body pt-0">
                                 <div class="totalitem">
-                                    <h4>Total items : {{$countcart}}</h4>
+                                    <h4>Total items : {{ $countcart }}</h4>
                                     @if ($listcartaktif == null)
-                                        
                                     @else
-                                        <a href="/delete-all-pos/{{$listcartaktif->idcart}}">Clear all</a>
+                                        <a href="/delete-all-pos/{{ $listcartaktif->idcart }}">Clear all</a>
                                     @endif
                                 </div>
                                 <div class="product-table">
                                     @foreach ($listcart as $item)
-                                    <ul class="product-lists">
-                                        <li>
-                                            <div class="productimg">
+                                        <ul class="product-lists">
+                                            <li>
+                                                <div class="productimg">
 
-                                                <div class="productimgs">
-                                                    <img src="{{ asset('storage/fotoproduk/' . $item->fotoproduk) }}">
-                                                </div>
-                                                <div class="productcontet">
-                                                    <h4>{{$item->namaproduk}}
-                                                        <a href="javascript:void(0);" class="ms-2" data-bs-toggle="modal"
-                                                            data-bs-target="#edit"><img
-                                                                src="{{ asset('assets') }}/img/icons/edit-5.svg"
-                                                                alt="img"></a>
-                                                    </h4>
-                                                    <div class="productlinkset">
-                                                        <h5>{{$item->idcart}}</h5>
+                                                    <div class="productimgs">
+                                                        <img src="{{ asset('storage/fotoproduk/' . $item->fotoproduk) }}">
                                                     </div>
-                                                </div>
+                                                    <div class="productcontet">
+                                                        <h4>{{ $item->namaproduk }}
+                                                            <a href="javascript:void(0);" class="ms-2"
+                                                                data-bs-toggle="modal" data-bs-target="#edit"><img
+                                                                    src="{{ asset('assets') }}/img/icons/edit-5.svg"
+                                                                    alt="img"></a>
+                                                        </h4>
+                                                        <div class="productlinkset">
+                                                            <h5>{{ $item->idcart }}</h5>
+                                                        </div>
+                                                    </div>
 
-                                            </div>
-                                        </li>
-                                        <li>{{"Rp."." ".number_format($item->hargaproduk)}}</li>
-                                        <li>
-                                            <a class="confirm-text" href="javascript:void(0);"
-                                            onclick="confirm_modal('delete-pos/{{ $item->id }}');">
-                                            <img src="{{ asset('assets') }}/img/icons/delete.svg" alt="img"
-                                                data-toggle="tooltip" data-placement="top" title="DELETE DATA">
-                                        </a>
-                                        </li>
-                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li>{{ 'Rp.' . ' ' . number_format($item->hargaproduk) }}</li>
+                                            <li>
+                                                <a class="confirm-text" href="javascript:void(0);"
+                                                    onclick="confirm_modal('delete-pos/{{ $item->id }}');">
+                                                    <img src="{{ asset('assets') }}/img/icons/delete.svg" alt="img"
+                                                        data-toggle="tooltip" data-placement="top" title="DELETE DATA">
+                                                </a>
+                                            </li>
+                                        </ul>
                                     @endforeach
                                 </div>
                             </div>
@@ -231,19 +241,19 @@
                                     <ul>
                                         <li>
                                             <h5>Subtotal </h5>
-                                            <h6>{{"Rp."." ".number_format($subtotal)}}</h6>
+                                            <h6>{{ 'Rp.' . ' ' . number_format($subtotal) }}</h6>
                                         </li>
                                         <li class="total-value">
                                             <h5>Total </h5>
-                                            <h6>{{"Rp."." ".number_format($subtotal)}}</h6>
+                                            <h6>{{ 'Rp.' . ' ' . number_format($subtotal) }}</h6>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="btn-totallabel">
-                                        <button type="submit" class="btn btn-rounded text-white">
-                                            <h5>Checkout</h5>
-                                        </button>
-                                    <h6>{{"Rp."." ".number_format($subtotal)}}</h6>
+                                    <button type="submit" class="btn btn-rounded text-white">
+                                        <h5>Checkout</h5>
+                                    </button>
+                                    <h6>{{ 'Rp.' . ' ' . number_format($subtotal) }}</h6>
                                 </div>
                             </div>
                         </form>
