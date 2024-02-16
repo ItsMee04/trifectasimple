@@ -23,7 +23,6 @@ class CustomerController extends Controller
             'nikcustomer'       =>  'required',
             'tanggalcustomer'   =>  'required',
             'alamatcustomer'    =>  'required',
-            'status'            =>  'required',
         ]);
 
         DB::table('customer')->insert(
@@ -33,7 +32,6 @@ class CustomerController extends Controller
                 'nikcustomer'       =>  $request->nikcustomer,
                 'tanggalcustomer'   =>  $request->tanggalcustomer,
                 'alamatcustomer'    =>  $request->alamatcustomer,
-                'status'            => $request->status
             ]
         );
         return redirect('customer')->with('success', 'Data Success Disimpan !');

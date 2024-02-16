@@ -161,13 +161,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Status</label>
-                            <select class="select form-control form-white" name="status" required>
-                                <option value="1"> AKTIF</option>
-                                <option value="2"> TIDAK AKTIF</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label>Alamat Customer</label>
                             <textarea class="form-control form-white" name="alamatcustomer" required></textarea>
                         </div>

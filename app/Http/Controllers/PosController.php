@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CartModel;
 use App\Models\CustomerModel;
 use App\Models\ProdukModel;
+use App\Models\PromoModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -69,6 +70,8 @@ class PosController extends Controller
             $idcart = $id . $tahun . $nourut;
         }
 
+        $listpromo = PromoModel::where('status', 1)->get();
+
         return view('admin.pos', [
             'listcincin'    => $listcincin,
             'listanting'    => $listanting,
@@ -79,7 +82,8 @@ class PosController extends Controller
             'countcart'     => $countcart,
             'idtransaksi'   => $idcart,
             'subtotal'      => $subtotal,
-            'listcartaktif' => $listcartaktif
+            'listcartaktif' => $listcartaktif,
+            'listpromo'     => $listpromo
         ]);
     }
 
@@ -92,7 +96,9 @@ class PosController extends Controller
 
     public function deleteAllPos($id)
     {
-        $listcart = CartModel::where('idcart', $id)->delete();
+        $listcart = CartModel::where('idcart', $id)
+            ->where('sales', Auth::user()->iduser)
+            ->delete();
 
         return redirect('pos')->with('success', 'Data Berhasil Dihapus !');
     }
@@ -132,6 +138,7 @@ class PosController extends Controller
             ->where('cart.status', 1)
             ->where('sales', Auth::user()->iduser)
             ->sum('produk.hargaproduk');
+
 
         $insert = DB::table('transaksi')
             ->insert([

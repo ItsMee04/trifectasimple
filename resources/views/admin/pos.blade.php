@@ -183,6 +183,19 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
+                                        <div class="select-split ">
+                                            <div class="select-group w-100">
+                                                <select class="select" name="payments" required>
+                                                    @foreach ($listpromo as $itempromo)
+                                                        <option disabled selected hidden> Pilih Promo</option>
+                                                        <option value="{{ $itempromo->id }}">
+                                                            {{ $itempromo->namapromo }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
                                         <div class="select-split">
                                             <div class="select-group w-100">
                                                 <textarea class="form-control" name="keterangan" placeholder="Masukan Keterangan" required></textarea>
@@ -198,7 +211,10 @@
                                     <h4>Total items : {{ $countcart }}</h4>
                                     @if ($listcartaktif == null)
                                     @else
-                                        <a href="/delete-all-pos/{{ $listcartaktif->idcart }}">Clear all</a>
+                                        <a class="confirm-text" href="javascript:void(0);"
+                                            onclick="confirm_modal('delete-all-pos/{{ $listcartaktif->idcart }}');">
+                                            Clear all
+                                        </a>
                                     @endif
                                 </div>
                                 <div class="product-table">
@@ -286,6 +302,36 @@
             </div>
         </div>
     </div>
+    <!-- Modal Popup untuk delete-->
+    <div class="modal custom-modal fade" id="modal_deleteall">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center"><b>APAKAH ANDA YAKIN AKAN MENGHAPUS DATA
+                            INI ?</b></h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"><span
+                            aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <form action="identitas" method="POST">
+                        <div class="submit-section">
+                            <a id="delete_all_link" class="btn btn-danger save-category submit-btn"
+                                data-dismiss="modal">Delete</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Javascript untuk popup modal Delete-->
+    <script type="text/javascript">
+        function confirm_modal(delete_url) {
+            $('#modal_deleteall').modal('show', {
+                backdrop: 'static'
+            });
+            document.getElementById('delete_all_link').setAttribute('href', delete_url);
+        }
+    </script>
     <!-- Javascript untuk popup modal Delete-->
     <script type="text/javascript">
         function confirm_modal(delete_url) {

@@ -186,7 +186,7 @@
                         </div>
                         <div class="form-group">
                             <label>Tanggal Lahir Customer</label>
-                            <input type="date" class="form-control form-white" name="tanggallahircustomer"
+                            <input type="date" class="form-control form-white" name="tanggalcustomer"
                                 placeholder="Masukan Kontak Customer" required>
                         </div>
                         <div class="form-group">
